@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Organization {
+  id         Int          @unique
+  name       String       @db.VarChar(50)
+  status     Int
+  Tribe      Tribe[]
+  Repository Repository[]
+}
+
+model Tribe {
+  id              Int          @unique
+  id_organization Int
+  organization    Organization @relation(fields: [id_organization], references: [id])
+  name            String       @db.VarChar(50)
+  status          Int
+  Repository      Repository[]
+}
+
+model Repository {
+  id             Int           @unique
+  id_tribe       Int
+  tribe          Tribe         @relation(fields: [id_tribe], references: [id])
+  name           String        @db.VarChar(50)
+  state          String        @db.VarChar(1)
+  create_time    DateTime      @default(now())
+  status         String        @db.VarChar(1)
+  Organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId Int?
+}
+
+model metric {
+  id              Int @unique
+  bugs            Int
+  vulnerabilities Int
+  hotspot         Int
+  code_smells     Int
+}
