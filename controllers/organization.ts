@@ -87,10 +87,10 @@ const updateItem = async (req: Request, res: Response) => {
 const deleteItem = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
-    const updateData = await prisma.organization.delete({
+    const deleteData = await prisma.organization.delete({
       where: { id },
     });
-    res.status(200).send({ data: updateData });
+    res.status(200).send({ data: deleteData });
   } catch (error) {
     handleHttpError(res, "Error al eliminar la organización");
   }

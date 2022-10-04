@@ -25,8 +25,8 @@ CREATE TABLE "Repository" (
 );
 
 -- CreateTable
-CREATE TABLE "metric" (
-    "id" INT4 NOT NULL,
+CREATE TABLE "Metrics" (
+    "id_repository" INT4 NOT NULL,
     "bugs" INT4 NOT NULL,
     "vulnerabilities" INT4 NOT NULL,
     "hotspot" INT4 NOT NULL,
@@ -43,7 +43,7 @@ CREATE UNIQUE INDEX "Tribe_id_key" ON "Tribe"("id");
 CREATE UNIQUE INDEX "Repository_id_key" ON "Repository"("id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "metric_id_key" ON "metric"("id");
+CREATE UNIQUE INDEX "Metrics_id_repository_key" ON "Metrics"("id_repository");
 
 -- AddForeignKey
 ALTER TABLE "Tribe" ADD CONSTRAINT "Tribe_id_organization_fkey" FOREIGN KEY ("id_organization") REFERENCES "Organization"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -53,3 +53,6 @@ ALTER TABLE "Repository" ADD CONSTRAINT "Repository_id_tribe_fkey" FOREIGN KEY (
 
 -- AddForeignKey
 ALTER TABLE "Repository" ADD CONSTRAINT "Repository_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "Organization"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Metrics" ADD CONSTRAINT "Metrics_id_repository_fkey" FOREIGN KEY ("id_repository") REFERENCES "Repository"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

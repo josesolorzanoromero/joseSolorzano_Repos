@@ -37,10 +37,12 @@ model Repository {
   status         String        @db.VarChar(1)
   Organization   Organization? @relation(fields: [organizationId], references: [id])
   organizationId Int?
+  Metrics        Metrics[]
 }
 
-model metric {
-  id              Int @unique
+model Metrics {
+  id_repository   Int        @unique
+  repository      Repository @relation(fields: [id_repository], references: [id])
   bugs            Int
   vulnerabilities Int
   hotspot         Int

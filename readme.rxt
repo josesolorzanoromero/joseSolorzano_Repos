@@ -1,0 +1,31 @@
+echo "# joseSolorzano_Repos" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/josesolorzanoromero/joseSolorzano_Repos.git
+git push -u origin main
+
+git remote add origin https://github.com/josesolorzanoromero/joseSolorzano_Repos.git
+git branch -M main
+git push -u origin main
+
+npx prisma migrate dev --name=init
+
+
+********DETALLE DE LA PRUEBA********
+***Ejercicio 1
+[GET] API MOCK Simulada
+http://localhost:3001/api/mock
+
+***Ejercicio 2
+[GET] Todos los registros
+http://localhost:3001/api/organization
+[GET] Un solo registro
+http://localhost:3001/api/organization/1
+[POST] Crea un registro
+http://localhost:3001/api/organization
+[PUT] Actualiza un registro
+http://localhost:3001/api/organization/1
+[DELETE] Elimina un registro
+http://localhost:3001/api/organization/1
