@@ -43,3 +43,5 @@ http://localhost:3001/api/tribe/createfile/1
 
 
 NOTA: Expongo en archivo .env en el repositorio para tema de pruebas
+Para detalle de las llamadas a API expongo el siguiente enlace
+https://www.getpostman.com/collections/481828baaae0c2c61dab
