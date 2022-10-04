@@ -20,6 +20,12 @@ const getItem = async (req: Request, res: Response) => {
       },
       include: { Metrics: { where: { coverage: { gt: 75 } } } },
     });
+    if (data.length === 0) {
+      res
+        .status(200)
+        .send({ data: { error: "La Tribu no se encuentra registrada" } });
+      return;
+    }
     console.log("data");
     console.log(data);
 
