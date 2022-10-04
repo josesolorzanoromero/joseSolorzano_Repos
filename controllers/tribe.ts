@@ -3,20 +3,30 @@ import { PrismaClient } from "@prisma/client";
 import { handleHttpError } from "../utils/handleErrors";
 const prisma = new PrismaClient();
 /**
- * DELETE Item
+ * Get Obtener métricas de repositorios por tribu
  * @param req
  * @param res
  */
-const deleteItem = async (req: Request, res: Response) => {
+const getItem = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
-    const deleteData = await prisma.tribe.delete({
-      where: { id },
+    const newDate = new Date();
+    const year = newDate.getFullYear();
+    const data = await prisma.repository.findMany({
+      where: {
+        id_tribe: id,
+        create_time: { gte: new Date(`${year}-01-01`) },
+        state: "E",
+      },
+      include: { Metrics: { where: { coverage: { gt: 75 } } } },
     });
-    res.status(200).send({ data: deleteData });
+    console.log("data");
+    console.log(data);
+
+    res.status(200).send({ data });
   } catch (error) {
-    handleHttpError(res, "Error al eliminar las tribus");
+    handleHttpError(res, "Error al obtener la tribu");
   }
 };
 
-export { deleteItem };
+export { getItem };

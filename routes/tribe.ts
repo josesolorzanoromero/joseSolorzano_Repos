@@ -1,7 +1,7 @@
-import { deleteItem } from "../controllers/tribe";
+import { getItem } from "../controllers/tribe";
 import express from "express";
 const router = express.Router();
 
-router.delete("/:id", deleteItem);
+router.get("/:id", getItem);
 
 export = router;

@@ -58,12 +58,26 @@ const createItem = async (_req: Request, res: Response) => {
       console.log("Repositorios");
       console.log(data);
     }
+    var date = new Date("25 Dec 2021");
+    const dataLastYear = await prisma.repository.create({
+      data: {
+        id: 106,
+        id_tribe: 101,
+        name: "Repository Last Year",
+        state: "E",
+        create_time: date,
+        status: "A",
+      },
+    });
+    console.log("Repositorios Last Year");
+    console.log(dataLastYear);
 
     //CREA METRICAS
     for (let i = 0; i < metricsData.length; i++) {
       const data = await prisma.metrics.create({
         data: {
           id_repository: parseInt((i + 100).toString()),
+          coverage: metricsData[i].coverage,
           bugs: metricsData[i].bugs,
           vulnerabilities: metricsData[i].vulnerabilities,
           hotspot: metricsData[i].hotspot,

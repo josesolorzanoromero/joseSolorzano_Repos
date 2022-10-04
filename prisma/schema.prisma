@@ -43,6 +43,7 @@ model Repository {
 model Metrics {
   id_repository   Int        @unique
   repository      Repository @relation(fields: [id_repository], references: [id])
+  coverage        Float
   bugs            Int
   vulnerabilities Int
   hotspot         Int

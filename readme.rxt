@@ -14,6 +14,10 @@ npx prisma migrate dev --name=init
 
 
 ********DETALLE DE LA PRUEBA********
+***Para tener datos de prueba. Todos los [id] estan desde el 101 en adelante
+http://localhost:3001/api/example-data
+
+
 ***Ejercicio 1
 [GET] API MOCK Simulada
 http://localhost:3001/api/mock
