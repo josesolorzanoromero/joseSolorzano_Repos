@@ -27,6 +27,7 @@ CREATE TABLE "Repository" (
 -- CreateTable
 CREATE TABLE "Metrics" (
     "id_repository" INT4 NOT NULL,
+    "coverage" FLOAT8 NOT NULL,
     "bugs" INT4 NOT NULL,
     "vulnerabilities" INT4 NOT NULL,
     "hotspot" INT4 NOT NULL,

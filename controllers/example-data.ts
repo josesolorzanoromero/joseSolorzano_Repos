@@ -16,11 +16,21 @@ const prisma = new PrismaClient();
  */
 const createItem = async (_req: Request, res: Response) => {
   try {
+    //ELIMINA TODOS LOS DDATOS
+    // const allDataMetrics = prisma.findMany()
+    await await prisma.metrics.deleteMany();
+    await await prisma.repository.deleteMany();
+    await await prisma.tribe.deleteMany();
+    await await prisma.organization.deleteMany();
+
+    // for(let i=0;i<allDataMetrics.length;i++){
+
+    // }
     //CREA ORGANIZACIONES
     for (let i = 0; i < organizationsData.length; i++) {
       const data = await prisma.organization.create({
         data: {
-          id: parseInt((i + 100).toString()),
+          id: parseInt((i + 1).toString()),
           name: organizationsData[i].name,
           status: organizationsData[i].status,
         },
@@ -33,7 +43,7 @@ const createItem = async (_req: Request, res: Response) => {
     for (let i = 0; i < tribesData.length; i++) {
       const data = await prisma.tribe.create({
         data: {
-          id: parseInt((i + 100).toString()),
+          id: parseInt((i + 1).toString()),
           id_organization: tribesData[i].id_organization,
           name: tribesData[i].name,
           status: tribesData[i].status,
@@ -47,7 +57,7 @@ const createItem = async (_req: Request, res: Response) => {
     for (let i = 0; i < repositoryData.length; i++) {
       const data = await prisma.repository.create({
         data: {
-          id: parseInt((i + 100).toString()),
+          id: parseInt((i + 1).toString()),
           id_tribe: repositoryData[i].id_tribe,
           name: repositoryData[i].name,
           state: repositoryData[i].state,
@@ -61,8 +71,8 @@ const createItem = async (_req: Request, res: Response) => {
     var date = new Date("25 Dec 2021");
     const dataLastYear = await prisma.repository.create({
       data: {
-        id: 106,
-        id_tribe: 101,
+        id: 7,
+        id_tribe: 1,
         name: "Repository Last Year",
         state: "E",
         create_time: date,
@@ -76,7 +86,7 @@ const createItem = async (_req: Request, res: Response) => {
     for (let i = 0; i < metricsData.length; i++) {
       const data = await prisma.metrics.create({
         data: {
-          id_repository: parseInt((i + 100).toString()),
+          id_repository: parseInt((i + 1).toString()),
           coverage: metricsData[i].coverage,
           bugs: metricsData[i].bugs,
           vulnerabilities: metricsData[i].vulnerabilities,

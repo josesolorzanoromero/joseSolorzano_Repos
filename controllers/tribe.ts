@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { handleHttpError } from "../utils/handleErrors";
+import axios from "axios";
+
 const prisma = new PrismaClient();
 /**
  * Get Obtener métricas de repositorios por tribu
@@ -12,26 +14,84 @@ const getItem = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
     const newDate = new Date();
     const year = newDate.getFullYear();
-    const data = await prisma.repository.findMany({
+    const dataRespository = await prisma.repository.findMany({
       where: {
         id_tribe: id,
         create_time: { gte: new Date(`${year}-01-01`) },
         state: "E",
       },
-      include: { Metrics: { where: { coverage: { gt: 75 } } } },
+      include: {
+        Metrics: { where: { coverage: { gt: 75 } } },
+        Organization: true,
+        tribe: { include: { organization: true } },
+      },
     });
-    if (data.length === 0) {
-      res
-        .status(200)
-        .send({ data: { error: "La Tribu no se encuentra registrada" } });
+    console.log("dataRespository");
+    console.log(dataRespository);
+
+    if (dataRespository.length === 0) {
+      res.status(200).send({
+        data: {
+          error:
+            "La Tribu no se encuentra registrada o no tiene repositorios que cumplan con la cobertura necesaria",
+        },
+      });
       return;
     }
-    console.log("data");
-    console.log(data);
+
+    //Get the TRIBE data
+    // const dataTribe = await prisma.tribe.findUnique({
+    //   where: { id },
+    // });
+
+    const data = [];
+
+    //Get the REPOSITORY
+    for (let i = 0; i < dataRespository.length; i++) {
+      const dataMetric: any = await prisma.metrics.findUnique({
+        where: { id_repository: dataRespository[i].id },
+      });
+
+      const dataExternalAPI = await axios.get(
+        `http://localhost:3001/api/mock/${dataRespository[i].id}`
+      );
+      console.log("dataExternalAPI");
+      console.log(dataExternalAPI.data.data);
+      const verificationState =
+        dataExternalAPI.data.data.state === 604
+          ? "Verificado"
+          : dataExternalAPI.data.data.state === 605
+          ? "En espera"
+          : "Aprobado";
+
+      const state =
+        dataRespository[i].state === "E"
+          ? "Habilitado - Enable"
+          : dataRespository[i].state === "D"
+          ? "Inhabilitada - Disable"
+          : "Archivado - Archived";
+
+      const objData = {
+        id: dataRespository[i].id,
+        name: dataRespository[i].name,
+        tribe: dataRespository[i].tribe.name,
+        organization: dataRespository[i].tribe.organization.name,
+        coverage: dataMetric.coverage,
+        codeSmells: dataMetric.code_smells,
+        bugs: dataMetric.bugs,
+        vulnerabilities: dataMetric.vulnerabilities,
+        hotspot: dataMetric.hotspot,
+        verificationState,
+        state,
+      };
+      data.push(objData);
+    }
 
     res.status(200).send({ data });
   } catch (error) {
-    handleHttpError(res, "Error al obtener la tribu");
+    console.log("error");
+    console.log(error);
+    handleHttpError(res, "Error al obtener los repositorios de la tribu");
   }
 };
 

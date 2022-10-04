@@ -14,4 +14,21 @@ const getItems = async (_req: Request, res: Response) => {
   }
 };
 
-export { getItems };
+const getItem = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    console.log("id");
+    console.log(id);
+    const existData = data.repositories.find((item) => {
+      return item.id == parseInt(id);
+    });
+    console.log("existData");
+    console.log(existData);
+
+    res.status(200).send({ data: existData });
+  } catch (error) {
+    handleHttpError(res, "Error al obtener MOCK data");
+  }
+};
+
+export { getItems, getItem };

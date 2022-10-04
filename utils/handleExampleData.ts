@@ -7,52 +7,52 @@ const organizationsData = [
 ];
 
 const tribesData = [
-  { id_organization: 101, name: "Tribu A", status: 1 },
-  { id_organization: 101, name: "Tribu B", status: 2 },
-  { id_organization: 102, name: "Tribu C", status: 3 },
-  { id_organization: 102, name: "Tribu D", status: 1 },
-  { id_organization: 103, name: "Tribu E", status: 2 },
-  { id_organization: 103, name: "Tribu F", status: 3 },
+  { id_organization: 1, name: "Tribu A", status: 1 },
+  { id_organization: 1, name: "Tribu B", status: 2 },
+  { id_organization: 2, name: "Tribu C", status: 3 },
+  { id_organization: 2, name: "Tribu D", status: 1 },
+  { id_organization: 3, name: "Tribu E", status: 2 },
+  { id_organization: 3, name: "Tribu F", status: 3 },
 ];
 
 const repositoryData = [
   {
-    id_tribe: 101,
+    id_tribe: 1,
     name: "Repositorio A",
     create_time: new Date(),
     status: "A",
     state: "E",
   },
   {
-    id_tribe: 101,
+    id_tribe: 1,
     name: "Repositorio B",
     create_time: new Date(),
     status: "I",
     state: "D",
   },
   {
-    id_tribe: 102,
+    id_tribe: 2,
     name: "Repositorio C",
     create_time: new Date(),
     status: "A",
     state: "A",
   },
   {
-    id_tribe: 102,
+    id_tribe: 2,
     name: "Repositorio D",
     create_time: new Date(),
     status: "I",
     state: "E",
   },
   {
-    id_tribe: 103,
+    id_tribe: 3,
     name: "Repositorio E",
     create_time: new Date(),
     status: "A",
     state: "D",
   },
   {
-    id_tribe: 103,
+    id_tribe: 3,
     name: "Repositorio F",
     create_time: new Date(),
     status: "I",
