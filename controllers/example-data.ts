@@ -18,10 +18,10 @@ const createItem = async (_req: Request, res: Response) => {
   try {
     //ELIMINA TODOS LOS DDATOS
     // const allDataMetrics = prisma.findMany()
-    await await prisma.metrics.deleteMany();
-    await await prisma.repository.deleteMany();
-    await await prisma.tribe.deleteMany();
-    await await prisma.organization.deleteMany();
+    await prisma.metrics.deleteMany();
+    await prisma.repository.deleteMany();
+    await prisma.tribe.deleteMany();
+    await prisma.organization.deleteMany();
 
     // for(let i=0;i<allDataMetrics.length;i++){
 

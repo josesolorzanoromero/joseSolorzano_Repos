@@ -12,15 +12,16 @@ git push -u origin main
 
 npx prisma migrate dev --name=init
 
-
 ********DETALLE DE LA PRUEBA********
-***Para tener datos de prueba. Todos los [id] estan desde el 101 en adelante
+***Para tener datos de prueba. Todos los [id] estan desde el 1 en adelante
 http://localhost:3001/api/example-data
 
 
 ***Ejercicio 1
-[GET] API MOCK Simulada
+[GET] API MOCK Simulada todos los egistros
 http://localhost:3001/api/mock
+[GET] API MOCK Simulada un solo registro
+http://localhost:3001/api/mock/1
 
 ***Ejercicio 2
 [GET] Todos los registros
@@ -33,3 +34,12 @@ http://localhost:3001/api/organization
 http://localhost:3001/api/organization/1
 [DELETE] Elimina un registro
 http://localhost:3001/api/organization/1
+
+***Ejercicio 3
+[GET] Métricas de un repositorio
+http://localhost:3001/api/tribe
+[GET] Métricas de un repositorio
+http://localhost:3001/api/tribe/createfile/1
+
+
+NOTA: Expongo en archivo .env en el repositorio para tema de pruebas
