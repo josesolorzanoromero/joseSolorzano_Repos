@@ -10,6 +10,20 @@ git remote add origin https://github.com/josesolorzanoromero/joseSolorzano_Repos
 git branch -M main
 git push -u origin main
 
+git stash y git stash ppo
+TDD OJO
+(function)()
+Test para las funciones del controlador
+jest sobre los controladores
+Nest tiene jest typeORM
+TDD Filosofía, metodología de contrucción de software
+
+jest
+ - controladores
+ - Servicios
+
+
+
 npx prisma migrate dev --name=init
 
 ********DETALLE DE LA PRUEBA********
